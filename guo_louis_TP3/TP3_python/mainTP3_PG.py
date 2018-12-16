@@ -1,7 +1,9 @@
 import numpy as np
 import lqg1d
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import utils
+import models
+import steppers
 
 class ConstantStep(object):
     def __init__(self, learning_rate):
@@ -15,7 +17,7 @@ class ConstantStep(object):
 #####################################################
 env = lqg1d.LQG1D(initial_state_type='random')
 
-policy =
+policy = models.gaussian_policy(theta = 0, sigma = 0.4)
 
 #####################################################
 # Experiments parameters
@@ -33,8 +35,8 @@ learning_rate = 0.1
 
 
 #####################################################
-# define the update rule (stepper)
-stepper =  # e.g., constant, adam or anything you want
+# define the update rule (steppers)
+stepper = steppers.constant_stepper(learning_rate) # e.g., constant, adam or anything you want
 
 # fill the following part of the code with
 #  - REINFORCE estimate i.e. gradient estimate
@@ -47,7 +49,7 @@ for _ in range(n_itr):
 
     paths = utils.collect_episodes(env, policy=policy, horizon=T, n_episodes=N)
 
-
+"""
 # plot the average return obtained by simulating the policy
 # at each iteration of the algorithm (this is a rought estimate
 # of the performance
@@ -58,3 +60,4 @@ plt.plot(avg_return)
 # of iteration k
 plt.figure()
 plt.plot(mean_parameters)
+"""

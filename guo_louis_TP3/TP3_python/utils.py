@@ -37,8 +37,9 @@ def collect_episodes(mdp, policy=None, horizon=None, n_episodes=1, render=False)
         ))
     return paths
 
-def estimate_performance(mdp, policy=None, horizon=None, n_episodes=1, gamma=0.9):
-    paths = collect_episodes(mdp, policy, horizon, n_episodes)
+def estimate_performance(mdp, policy=None, horizon=None, n_episodes=1, gamma=0.9, paths = None):
+    if paths is None:
+        paths = collect_episodes(mdp, policy, horizon, n_episodes)
     
     J = 0.
     for p in paths:
